@@ -39,6 +39,11 @@ namespace Baufflaechenverwaltung
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public FlaechenStatus Status { get; set; } = FlaechenStatus.Frei;
+
+        public bool KannReserviertWerden()
+        {
+            return Status == FlaechenStatus.Frei;
+        }
     }
 
     public class Grundstueck
