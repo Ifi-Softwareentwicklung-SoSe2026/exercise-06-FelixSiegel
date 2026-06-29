@@ -52,6 +52,11 @@ namespace Baufflaechenverwaltung
         public decimal Bodenrichtwert { get; set; }
         public string Eigentuemer { get; set; } = string.Empty;
         public List<Bauflaeche> Bauflaechen { get; set; } = new List<Bauflaeche>();
+
+        public bool IstBebaubar()
+        {
+            return Bebaubarkeit == Bebaubarkeit.Ja || Bebaubarkeit == Bebaubarkeit.Auflagen;
+        }
     }
 
     public class Bauvorhaben

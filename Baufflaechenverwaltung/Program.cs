@@ -31,8 +31,25 @@ var vorhaben = new Bauvorhaben
     Status = VorhabenStatus.AntragEingereicht
 };
 
-vorhaben.ZugeordneteFlaechen.Add(flaeche1);
-flaeche1.Status = FlaechenStatus.Reserviert;
+// Prüfung der Bebaubarkeit und Reservierbarkeit
+if (grundstueck.IstBebaubar() && flaeche1.KannReserviertWerden())
+{
+    vorhaben.ZugeordneteFlaechen.Add(flaeche1);
+    flaeche1.Status = FlaechenStatus.Reserviert;
+    Console.WriteLine("Fläche 1 erfolgreich reserviert.");
+} else 
+{
+    Console.WriteLine("Fläche kann nicht reserviert werden (nicht bebaubar oder bereits belegt).");
+}
+
+// Versuch einer Doppelreservierung
+if (flaeche1.KannReserviertWerden())
+{
+    Console.WriteLine("Fläche 1 erneut reserviert.");
+} else 
+{
+    Console.WriteLine("Fehler: Fläche 1 ist bereits reserviert oder bebaut.");
+}
 
 Console.WriteLine($"Grundstück {grundstueck.Flurstuecknummer} mit {grundstueck.Bauflaechen.Count} Flächen verwaltet.");
 Console.WriteLine($"Bauvorhaben von {vorhaben.Antragsteller.Name} ist {vorhaben.Status} und nutzt {vorhaben.ZugeordneteFlaechen.Count} Fläche(n).");
