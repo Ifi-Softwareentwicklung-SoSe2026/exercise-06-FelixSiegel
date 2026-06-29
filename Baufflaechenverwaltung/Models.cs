@@ -39,6 +39,11 @@ namespace Baufflaechenverwaltung
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public FlaechenStatus Status { get; set; } = FlaechenStatus.Frei;
+
+        public bool KannReserviertWerden()
+        {
+            return Status == FlaechenStatus.Frei;
+        }
     }
 
     public class Grundstueck
@@ -52,6 +57,11 @@ namespace Baufflaechenverwaltung
         public decimal Bodenrichtwert { get; set; }
         public string Eigentuemer { get; set; } = string.Empty;
         public List<Bauflaeche> Bauflaechen { get; set; } = new List<Bauflaeche>();
+
+        public bool IstBebaubar()
+        {
+            return Bebaubarkeit == Bebaubarkeit.Ja || Bebaubarkeit == Bebaubarkeit.Auflagen;
+        }
     }
 
     public class Bauvorhaben
